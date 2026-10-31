@@ -1,0 +1,31 @@
+# Normaliza los finales de línea y protege los binarios
+* text=auto
+
+# Se ejecutan en Linux/Docker: siempre LF (un CRLF rompe run.sh en Alpine)
+*.sh text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+*.conf text eol=lf
+/mvnw text eol=lf
+/gradlew text eol=lf
+
+# Scripts de Windows: CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binarios: Git no los toca ni intenta mostrar diferencias de texto
+*.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pal binary
+*.wav binary
+*.mp3 binary
+*.mp4 binary
+*.mid binary
+*.zip binary
+*.7z binary
+*.rar binary
