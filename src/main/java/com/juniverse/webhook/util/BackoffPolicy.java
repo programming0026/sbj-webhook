@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.util;
 
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.jayway.jsonpath.JsonPath;
-import com.juniverse.webhook.receiver.ReceivedEventStore;
-import com.juniverse.webhook.receiver.ReceiverState;
-import com.juniverse.webhook.security.WebhookSignature;
+import com.juniverse.webhook.repository.ReceivedEventStore;
+import com.juniverse.webhook.model.ReceiverState;
+import com.juniverse.webhook.util.WebhookSignature;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;

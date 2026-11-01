@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.service;
 
 import com.juniverse.webhook.config.WebhookProperties;
 import java.security.SecureRandom;
@@ -9,6 +9,9 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
+import com.juniverse.webhook.model.Subscription;
+import com.juniverse.webhook.repository.SubscriptionRepository;
+import com.juniverse.webhook.util.TargetValidator;
 
 /** Gestión de suscripciones: alta, baja, rotación del secreto y envío de un evento de prueba. */
 @Service

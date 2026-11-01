@@ -1,10 +1,10 @@
-package com.juniverse.webhook.security;
+package com.juniverse.webhook.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.juniverse.webhook.security.WebhookSignature.Verification;
+import com.juniverse.webhook.util.WebhookSignature.Verification;
 import java.nio.charset.StandardCharsets;
 import java.util.HexFormat;
 import java.util.List;

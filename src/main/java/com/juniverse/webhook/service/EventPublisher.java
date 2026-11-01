@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.service;
 
 import java.time.Clock;
 import java.util.List;
@@ -7,6 +7,10 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.databind.json.JsonMapper;
+import com.juniverse.webhook.model.Delivery;
+import com.juniverse.webhook.model.Subscription;
+import com.juniverse.webhook.repository.DeliveryRepository;
+import com.juniverse.webhook.repository.SubscriptionRepository;
 
 /**
  * Convierte un evento del negocio en entregas pendientes, una por suscriptor interesado. Se llama DENTRO de la transacción del

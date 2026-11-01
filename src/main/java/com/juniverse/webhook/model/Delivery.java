@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.model;
 
 /**
  * Entrega de un evento a una suscripción. Cada evento genera una entrega por suscriptor interesado, y cada entrega puede

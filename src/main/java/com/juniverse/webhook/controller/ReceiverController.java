@@ -1,7 +1,7 @@
-package com.juniverse.webhook.receiver;
+package com.juniverse.webhook.controller;
 
 import com.juniverse.webhook.config.WebhookProperties;
-import com.juniverse.webhook.security.WebhookSignature;
+import com.juniverse.webhook.util.WebhookSignature;
 import java.time.Clock;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.juniverse.webhook.model.ReceiverState;
+import com.juniverse.webhook.repository.ReceivedEventStore;
 
 /**
  * El <b>receptor</b>: el endpoint que recibe los webhooks. Las reglas de oro de un buen receptor están aquí:

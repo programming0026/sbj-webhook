@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.controller;
 
 import com.juniverse.webhook.config.WebhookProperties;
 import jakarta.validation.Valid;
@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.juniverse.webhook.model.AttemptRecord;
+import com.juniverse.webhook.model.Delivery;
+import com.juniverse.webhook.model.Subscription;
+import com.juniverse.webhook.repository.DeliveryRepository;
+import com.juniverse.webhook.service.SubscriptionService;
 
 /** API de administración de webhooks: suscripciones, historial de entregas y reenvío manual. */
 @RestController

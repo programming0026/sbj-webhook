@@ -1,4 +1,4 @@
-package com.juniverse.webhook.receiver;
+package com.juniverse.webhook.repository;
 
 import java.util.List;
 import org.springframework.dao.DuplicateKeyException;

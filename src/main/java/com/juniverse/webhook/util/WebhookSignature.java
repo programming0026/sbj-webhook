@@ -1,4 +1,4 @@
-package com.juniverse.webhook.security;
+package com.juniverse.webhook.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;

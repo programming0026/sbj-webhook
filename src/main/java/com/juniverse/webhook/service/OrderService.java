@@ -1,6 +1,5 @@
-package com.juniverse.webhook.orders;
+package com.juniverse.webhook.service;
 
-import com.juniverse.webhook.provider.EventPublisher;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.util.LinkedHashMap;

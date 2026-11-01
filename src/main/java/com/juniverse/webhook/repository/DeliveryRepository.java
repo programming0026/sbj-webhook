@@ -1,9 +1,11 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.repository;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
+import com.juniverse.webhook.model.AttemptRecord;
+import com.juniverse.webhook.model.Delivery;
 
 /** Acceso a las entregas y a su historial de intentos. */
 @Repository

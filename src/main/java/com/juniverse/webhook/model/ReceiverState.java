@@ -1,4 +1,4 @@
-package com.juniverse.webhook.receiver;
+package com.juniverse.webhook.model;
 
 import com.juniverse.webhook.config.WebhookProperties;
 import java.util.List;
@@ -87,12 +87,12 @@ public class ReceiverState {
     }
 
     /** Registra el inicio de una petición. */
-    void requestStarted() {
+    public void requestStarted() {
         activeRequests.incrementAndGet();
     }
 
     /** Registra el fin de una petición. */
-    void requestFinished() {
+    public void requestFinished() {
         activeRequests.decrementAndGet();
     }
 }

@@ -1,4 +1,4 @@
-package com.juniverse.webhook.orders;
+package com.juniverse.webhook.controller;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.juniverse.webhook.service.OrderService;
 
 /** Operaciones de negocio que disparan webhooks. */
 @RestController

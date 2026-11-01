@@ -1,7 +1,7 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.service;
 
 import com.juniverse.webhook.config.WebhookProperties;
-import com.juniverse.webhook.security.WebhookSignature;
+import com.juniverse.webhook.util.WebhookSignature;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -19,6 +19,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import com.juniverse.webhook.model.AttemptRecord;
+import com.juniverse.webhook.model.Delivery;
+import com.juniverse.webhook.model.Subscription;
+import com.juniverse.webhook.repository.DeliveryRepository;
+import com.juniverse.webhook.repository.SubscriptionRepository;
+import com.juniverse.webhook.util.BackoffPolicy;
+import com.juniverse.webhook.util.TargetValidator;
 
 /**
  * El <b>despachador</b>: entrega los avisos pendientes. Cada vuelta:

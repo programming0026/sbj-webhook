@@ -18,7 +18,7 @@ Es lo contrario de preguntar constantemente. En lugar de que tu aplicación cons
 
 ## Cómo se resuelve cada problema
 
-### Del lado del proveedor (`provider/`)
+### Del lado del proveedor (`SubscriptionService`, `EventPublisher`, `WebhookDispatcher`)
 
 | Problema | Solución |
 |----------|----------|
@@ -35,7 +35,7 @@ Es lo contrario de preguntar constantemente. En lugar de que tu aplicación cons
 | **SSRF**: alguien se suscribe con `http://169.254.169.254/` | `TargetValidator` bloquea localhost, redes privadas, enlace local, `100.64/10`, IPv6 local y esquemas que no sean http/https, al suscribirse **y** al entregar; el cliente HTTP **no sigue redirecciones** |
 | El secreto no debe filtrarse | Solo se muestra al crear o rotar; el listado solo enseña los últimos 4 caracteres |
 
-### Del lado del receptor (`receiver/`)
+### Del lado del receptor (`ReceiverController`, `ReceivedEventStore`)
 
 | Regla | Cómo |
 |-------|------|
@@ -72,17 +72,20 @@ Estados de una entrega: `PENDING` → `IN_FLIGHT` → `DELIVERED` | de vuelta a 
 
 ```text
 src/main/java/com/juniverse/webhook/
-├── security/WebhookSignature.java        # firmar y verificar (HMAC, marca de tiempo, tiempo constante)
-├── provider/
-│   ├── EventPublisher.java               # evento -> una entrega por suscriptor (en la transacción del negocio)
-│   ├── WebhookDispatcher.java            # reclama, envía con hilos virtuales, reintenta, desactiva con 410
-│   ├── BackoffPolicy.java                # espera exponencial con jitter
-│   ├── TargetValidator.java              # protección SSRF
-│   ├── SubscriptionService/Controller    # altas, rotación de secreto, ping, historial, reenvío
-│   └── *Repository, Subscription, Delivery, AttemptRecord
-├── receiver/                             # endpoint seguro + almacén idempotente + modo de fallos de demostración
-├── orders/                               # el "negocio" que genera los eventos
-└── config/, web/                         # propiedades, reloj inyectable, errores Problem Details
+├── controller/       # OrderController, SubscriptionController (altas, rotación de secreto, ping, historial, reenvío), ReceiverController (endpoint seguro)
+├── service/
+│   ├── EventPublisher.java       # evento -> una entrega por suscriptor (en la transacción del negocio)
+│   ├── WebhookDispatcher.java    # reclama, envía con hilos virtuales, reintenta, desactiva con 410
+│   ├── SubscriptionService.java  # lógica de suscripciones
+│   └── OrderService.java         # el "negocio" que genera los eventos
+├── repository/       # SubscriptionRepository, DeliveryRepository, ReceivedEventStore (almacén idempotente)
+├── model/            # Subscription, Delivery, AttemptRecord, ReceiverState (modo de fallos de demostración)
+├── util/
+│   ├── WebhookSignature.java     # firmar y verificar (HMAC, marca de tiempo, tiempo constante)
+│   ├── BackoffPolicy.java        # espera exponencial con jitter
+│   └── TargetValidator.java      # protección SSRF
+├── exception/        # errores Problem Details
+└── config/           # propiedades, reloj inyectable
 src/main/resources/schema.sql             # subscriptions, deliveries, attempts, orders, received_events
 ```
 

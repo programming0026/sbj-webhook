@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.model;
 
 /**
  * Registro de un intento de entrega (para el historial que se muestra al suscriptor).

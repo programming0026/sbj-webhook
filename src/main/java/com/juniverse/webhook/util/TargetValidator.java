@@ -1,4 +1,4 @@
-package com.juniverse.webhook.provider;
+package com.juniverse.webhook.util;
 
 import com.juniverse.webhook.config.WebhookProperties;
 import java.net.InetAddress;

@@ -1,4 +1,4 @@
-package com.juniverse.webhook.web;
+package com.juniverse.webhook.exception;
 
 import java.net.URI;
 import java.util.List;
