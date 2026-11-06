@@ -80,6 +80,7 @@ src/main/java/com/juniverse/webhook/
 │   └── OrderService.java         # el "negocio" que genera los eventos
 ├── repository/       # SubscriptionRepository, DeliveryRepository, ReceivedEventStore (almacén idempotente)
 ├── model/            # Subscription, Delivery, AttemptRecord, ReceiverState (modo de fallos de demostración)
+├── dto/              # CreateOrderRequest, CreateRequest, SubscriptionView, DeliveryView
 ├── util/
 │   ├── WebhookSignature.java     # firmar y verificar (HMAC, marca de tiempo, tiempo constante)
 │   ├── BackoffPolicy.java        # espera exponencial con jitter

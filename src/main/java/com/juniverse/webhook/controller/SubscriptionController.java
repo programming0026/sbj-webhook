@@ -1,10 +1,10 @@
 package com.juniverse.webhook.controller;
 
 import com.juniverse.webhook.config.WebhookProperties;
+import com.juniverse.webhook.dto.CreateRequest;
+import com.juniverse.webhook.dto.DeliveryView;
+import com.juniverse.webhook.dto.SubscriptionView;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.juniverse.webhook.model.AttemptRecord;
 import com.juniverse.webhook.model.Delivery;
 import com.juniverse.webhook.model.Subscription;
 import com.juniverse.webhook.repository.DeliveryRepository;
@@ -27,50 +26,6 @@ import com.juniverse.webhook.service.SubscriptionService;
 @RestController
 @RequestMapping("/api/webhooks")
 public class SubscriptionController {
-
-    /**
-     * Datos para suscribirse.
-     *
-     * @param url dirección que recibirá los avisos
-     * @param description descripción opcional
-     * @param events tipos de evento deseados ({@code order.created}, {@code order.paid}, {@code order.cancelled}, {@code ping} o {@code *})
-     * @param secret secreto propio opcional (mínimo 24 caracteres); si se omite el servidor genera uno seguro
-     */
-    public record CreateRequest(
-            @NotBlank(message = "La URL es obligatoria") @Size(max = 500, message = "La URL no puede superar los 500 caracteres") String url,
-            @Size(max = 200) String description,
-            @NotEmpty(message = "Indica al menos un tipo de evento") List<String> events,
-            @Size(min = 24, max = 100, message = "El secreto debe tener entre 24 y 100 caracteres") String secret) {
-    }
-
-    /**
-     * Suscripción tal como se muestra. El secreto solo aparece al crear o rotar: después se enmascara.
-     *
-     * @param id identificador
-     * @param url destino
-     * @param description descripción
-     * @param events eventos
-     * @param active si recibe avisos
-     * @param secret secreto completo (solo al crear o rotar) o {@code null}
-     * @param secretHint últimos caracteres del secreto, para reconocerlo
-     * @param rotating si hay un secreto anterior aún vigente
-     */
-    public record SubscriptionView(String id, String url, String description, List<String> events, boolean active, String secret, String secretHint, boolean rotating) {
-
-        static SubscriptionView of(Subscription s, boolean revealSecret, long now) {
-            return new SubscriptionView(s.id(), s.url(), s.description(), s.events(), s.active(), revealSecret ? s.secret() : null,
-                    "…" + s.secret().substring(s.secret().length() - 4), s.previousSecret() != null && s.previousSecretExpiresAt() > now);
-        }
-    }
-
-    /**
-     * Entrega para mostrar, con su historial de intentos.
-     *
-     * @param delivery datos de la entrega
-     * @param attempts historial de intentos
-     */
-    public record DeliveryView(Delivery delivery, List<AttemptRecord> attempts) {
-    }
 
     private final SubscriptionService service;
     private final DeliveryRepository deliveries;

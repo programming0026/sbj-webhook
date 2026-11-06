@@ -1,10 +1,7 @@
 package com.juniverse.webhook.controller;
 
+import com.juniverse.webhook.dto.CreateOrderRequest;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,16 +15,6 @@ import com.juniverse.webhook.service.OrderService;
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
-
-    /**
-     * Datos de un pedido nuevo.
-     *
-     * @param customer cliente
-     * @param amount importe
-     */
-    public record CreateOrderRequest(@NotBlank(message = "El cliente es obligatorio") String customer,
-            @NotNull(message = "El importe es obligatorio") @DecimalMin(value = "0.01", message = "El importe debe ser mayor que cero") BigDecimal amount) {
-    }
 
     private final OrderService service;
 
